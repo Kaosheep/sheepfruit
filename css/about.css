@@ -376,7 +376,7 @@ tr td:nth-child(2){
     top: 0;
     left: 0;
     z-index: 25;
-    padding:15% 5% 5%;
+    padding:10% 5% 5%;
 }
 .photobox .centerphoto{
     margin: auto;
@@ -563,7 +563,9 @@ tr td:nth-child(2){
         min-width: 390px;
         aspect-ratio: auto;
     }
-    
+    .photobox{
+        padding-top: 15%;
+    }
     .photobox .wrap{
         max-width: 90%;
         justify-content:start;

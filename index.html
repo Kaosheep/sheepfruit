@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,20 +10,16 @@
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
+    <div id="app">
     <div class="wrap">
         <ul class="topmenu">
-            <li ><a href="new.html">最新消息</a></li>
-            <li ><a href="about.html">園區介紹</a></li>
-            <li ><a href="activity.html">牧場體驗</a></li>
-            <li ><a href="QA.html">常見問題</a></li>
+            <li v-for = "(list,i) in topmenuarr"
+            :key ="i"><a :href="list.link">{{list.title}}</a></li>
         </ul>
         <div class="para">
-            <img src="back\cloudl.png" id="cl" alt="">
-            <img src="back\cloudr.png" id="cr" alt="">
-            <img src="back\moun2.png" id="moun" alt="">
-            <img src="back\floor.png" id="floor" alt="">
-            <img src="back\paralogo.png" id="paralogo" alt="">
+            <img v-for = "image in paraarr" :key="image.id" :src="image.src" :id="image.id">
         </div>
         <a href="shop.html" class="shop">
             <i class="fa-solid fa-store"></i>
@@ -33,32 +30,16 @@
     <header id="header"><a href="index.html"><img src="logo/logo.png" alt="logo"></a></header>
     <nav>
         <ul class="navmenu">
-            <li class="list"><a href="new.html">最新消息</a></li>
-            <li class="list"><a href="about.html">園區介紹</a>
-                <ul>
-                    <li><a href="about.html#price">門票資訊</a></li>
-                    <li><a href="about.html#map">園區導覽</a></li>
-                    <li><a href="about.html#story">園區沿革</a></li>
-                    <li><a href="about.html#photo">動物寫真</a></li>
-                </ul>
+            <li class="list" v-for ="list in navmenu">
+                <a :href="list.link">
+                    {{list.title}}
+                    <ul >
+                        <li v-for = "list in sublist">
+                            <a :href="sunli.link">{{sunli.title}}</a>
+                        </li>                    
+                    </ul>
+                </a>
             </li>
-            <li class="list"><a href="activity.html">牧場體驗</a>
-                <ul>
-                    <li><a href="activity.html#allact">活動總覽</a></li>
-                    <li><a href="activity.html#actblock">手作工坊</a></li>
-                    <li><a href="activity.html#bbq">烤肉方案</a></li>
-                </ul>
-            </li>
-            <li class="list"><a href="shop.html">小農產品</a>
-                <ul>
-                    <li><a href="milkshop.html">純乳系列</a></li>
-                    <li><a href="milkshop.html">常溫點心</a></li>
-                    <li><a href="milkshop.html">文創商品</a></li>
-                    <li><a href="milkshop.html">全部商品</a></li>
-                </ul>
-            </li>
-            <li class="list"><a href="QA.html">常見問題</a></li>
-            <li class="list"><a href="">登入</a></li>
         </ul> 
     </nav>   
     <div class="monav">
@@ -66,11 +47,7 @@
             <div class="center">
             <a href="index.html" ><img src="logo/logo.png" alt="logo" id="monavlogo"></a></div>
             <li style="--i:0;" id="close"><i class="fa-solid fa-circle-xmark"></i></li>
-            <li style="--i:1;"><a href="new.html"><i class="fa-regular fa-newspaper"></i><p>最新消息</p></a></li>
-            <li style="--i:2;"><a href="about.html"><i class="fa-solid fa-map-location-dot"></i><p>園區導覽</p></a></li>
-            <li style="--i:3;"><a href="activity.html"><i class="fa-solid fa-cow"></i><p>牧場體驗</p></a></li>
-            <li style="--i:4;"><a href="shop.html"><i class="fa-solid fa-store"></i><p>小農產品</p></a></li>
-            <li style="--i:5;"><a href="QA.html"><i class="fa-regular fa-circle-question"></i><p>常見問題</p></a></li>
+            <li v-for="(li,index) in monavmenu" :style="li.style"><a :href="li.link"><i :class="li.icon"></i><p>{{li.title}}</p></a></li>
         </div>
         <div class="monavbar">
             <a href=""><i class="fa-solid fa-user"></i></a>
@@ -93,29 +70,18 @@
     </div>
     <div class="path">
         <ul>
-            <li><a href="#new">消息<img src="logo/icon.png" id="one"></a></li>
-            <li><a href="#activity">體驗<img src="logo/icon.png" id="two"></a></li>
-            <li><a href="#shop">產品<img src="logo/icon.png" id="three"></a></li>
-            <li><a href="#contact">資訊<img src="logo/icon.png" id="four"></a></li> 
+            <li v-for="li in pathli"><a :href="li.link">{{li.title}}<img src="logo/icon.png" :id="li.id"></a></li>
         </ul>
         <img id="icona" src="logo/icona.png" alt="">
         <img id="icon" src="logo/icon.png" alt="">
     </div>
     <main>
         <div class="sum">
-            <div class="item">
-                <a href="about.html">
-                    <p><s>園區</s>導覽</p>
-                    <span><img src="activity/4849375_s.jpg"></span>
+            <div class="item" v-for="item in sumarr">
+                <a :href="item.link">
+                    <p><s>{{item.hides}}</s>{{item.title}}</p>
+                    <span><img :src="item.src"></span>
                 </a>
-            </div>
-            <div class="item">
-                <a href="activity.html"><p><s>牧場</s>體驗</p>
-                <span><img src="activity/26040835_m.jpg"></span></a>
-            </div>
-            <div class="item">
-                <a href="shop.html"><p><s>小農</s>產品</p>
-                    <span><img src="p/shopbar.jpg"></span></a>
             </div>
         </div>
         
@@ -124,132 +90,148 @@
             <div class="ground">
                 <div class="sheeprow">
                     <div class="view">
-                    <div class="newcol">
-                        <a href=""><img src="item\new1.png"></a>
-                        <a href=""><h3>烤肉週所有方案9折!</h3></a>
+                        <div class="newcol" v-for="news in newsarr">
+                            <a href=""><img :src="news.src"></a>
+                            <a href=""><h3>{{news.title}}</h3></a>
+                        </div>
                     </div>
-                    <div class="newcol">
-                        <a href=""><img src="item\new2.png"></a>
-                        <a href=""><h3>牧場採摘季：現在是採摘的最佳時機！帶上朋友和家人，一起來採摘新鮮的水果和蔬菜，體驗農場樂趣！</h3></a>
-                    </div>
-                    <div class="newcol">
-                        <a href=""><img src="item\new1.png"></a>
-                        <a href=""><h3>烤肉週所有方案9折!</h3></a>
-                    </div>
-                    <div class="newcol">
-                        <a href=""><img src="item\new2.png"></a>
-                        <a href=""><h3>牧場採摘季：現在是採摘的最佳時機！帶上朋友和家人，一起來採摘新鮮的水果和蔬菜，體驗農場樂趣！</h3></a>
-                    </div>
-                    <div class="newcol">
-                        <a href=""><img src="item\new1.png"></a>
-                        <a href=""><h3>烤肉週所有方案9折!</h3></a>
-                    </div>
-                    </div>
-                </div>
-                <div class="btngroup">
-                    <div class="btn">
-                        <button><i class="fa-solid fa-arrow-left"></i></button>
-                        <button><i class="fa-solid fa-arrow-right"></i></button>
-                    </div>
-                    <div class="more  btnchangecolor">
-                        <a class="btnchangecolortxt"href="new.html">更多消息<i class="btnchangecolortxt fa-solid fa-angles-right"></i>
-                        </a>
+                    <div class="btngroup">
+                        <div class="btn">
+                            <button><i class="fa-solid fa-arrow-left"></i></button>
+                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                        <div class="more  btnchangecolor">
+                            <a class="btnchangecolortxt" href="new.html">更多消息<i
+                                    class="btnchangecolortxt fa-solid fa-angles-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="activity" id="activity">
-            <div class="cloudtitle"><h2>牧場體驗</h2></div>
+            <div :class="cloud[3].cloudClass">
+                <h2>{{cloud[0].title}}</h2>
+            </div>
             <div class="act">
-                <div class="card">
-                     <a href="activity.html#allact"><img src="activity\25115618_s.jpg"><h3>動物互動</h3></a>
-                </div>
-                <div class="card">
-                    <a href="activity.html#actblock"><img src="bar\cartbar.jpg">
-                    <h3>手作工坊</h3></a>
-                </div>
-                <div class="card">
-                    <a href="activity.html#bbq"><img src="ready\a3.jpg">
-                    <h3>烤肉方案</h3></a>
+                <div v-for="(activity, index) in activityArray" :key="index" :class="activity.actClass">
+                    <a :href="activity.link"><img :src="activity.imgLink">
+                        <h3>{{activity.name}}</h3>
+                    </a>
                 </div>
             </div>
-            <div class="more btnchangecolor">
-                <a class="btnchangecolortxt" href="activity.html">更多活動<i class="btnchangecolortxt fa-solid fa-angles-right"></i></a>
+            <div :class="moreBtn[5].moreClass">
+                <a :class="moreBtn[3].txt" href="activity.html">{{moreBtn[0].btn}}<i
+                        :class="moreBtn[3].txt && moreBtn[4].right"></i></a>
             </div>
         </div>
-        <div class="cloudtitle" id="shop"><h2>熱銷產品</h2></div>
-        <div class="shop" >
+        <div :class="cloud[3].cloudClass" id="shop">
+            <h2>{{cloud[1].title}}</h2>
+        </div>
+        <div class="shop">
             <div class="sum">
-                <div class="item">
-                    <a href="milkshop.html"><p>純乳<s>系列</s></p>
-                    <span><img src="p/shopbar.jpg"></span></a>
-                </div>
-                <div class="item">
-                    <a href=""><p><s>點心</s>零食</p>
-                    <span><img src="p\23955063_s.jpg"></span></a>
-                </div>
-                <div class="item">
-                    <a href=""><p>文創<s>商品</s></p>
-                    <span><img src="p\24846460_s.jpg"></span></a>
+                <div v-for="(shop, index) in shopArray" :key="index" :class="shop.shopClass">
+                    <a :href="shop.link">
+                        <p>{{shop.firstName}}<s>{{shop.lastName}}</s></p>
+                        <span><img :src="shop.imgLink"></span>
+                    </a>
                 </div>
             </div>
-            <div class="more btnchangecolor">
-                <a class="btnchangecolortxt" href="shop.html">全部商品<i class="btnchangecolortxt fa-solid fa-angles-right"></i></a>
+            <div :class="moreBtn[5].moreClass">
+                <a :class="moreBtn[3].txt" href="shop.html">{{moreBtn[1].btn}}<i
+                        :class="moreBtn[3].txt && moreBtn[4].right"></i></a>
             </div>
             <div class="productwrap">
-            <div class="product">
-                <div class="object"><a href=""><img src="p/cookie.png" draggable="false"><p>羊奶餅乾</p></a></div>
-                <div class="object"><a href=""><img src="p/milk2.png" draggable="false"><p>咖啡羊奶</p></a></div>
-                <div class="object"><a href=""><img src="p/macaro.png" draggable="false"><p>冰淇淋馬卡龍</p></a></div>
-                <div class="object"><a href=""><img src="p/milk.png" draggable="false"><p>羊奶</p></a></div>
-                <div class="object"><a href=""><img src="p/mocha.png" draggable="false"><p>抹茶冰淇淋</p></a></div>
-                <div class="object"><a href=""><img src="p/pudding.png" draggable="false"><p>羊奶布丁</p></a></div>
-                <div class="object"><a href=""><img src="p/manjyu.png" draggable="false"><p>羊奶饅頭</p></a></div>
-                <div class="object"><a href=""><img src="p/manjyu2.png" draggable="false"><p>日式饅頭</p></a></div>
-            </div>    
-            <div class="btn">
-                <button id="left"><i class="fa-solid fa-arrow-left"></i></button>
-                <button id="right"><i class="fa-solid fa-arrow-right" ></i></button>
+                <div class="product">
+                    <div v-for="(product, index) in productArray" :key="index" :class="product.productClass"><a><img
+                                :src="product.imgLink" draggable="false">
+                            <p>{{product.name}}</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="btn">
+                    <button id="left"><i :class="productArray[8].leftArrow"></i></button>
+                    <button id="right"><i :class="productArray[9].rightArrow"></i></button>
+                </div>
             </div>
+            <div :class="moreBtn[6].shopClass">
+                <a :class="moreBtn[3].txt" href="shop.html"><i
+                        :class="moreBtn[7].shopIcon"></i>{{moreBtn[2].btn}}</a>
             </div>
-            <div class="goshop btnchangecolor">
-            <a class="btnchangecolortxt" href="shop.html"><i class="fa-solid fa-cart-shopping"></i>牧場直送 小農安心</a></div>
         </div>
         <div class="contact" id="contact">
-            <div class="cloudtitle"><h2>交通資訊</h2></div>
-            <div class="mapblock">
-                <div class="mapcard"><h3>羊桃觀光牧場</h3>
-                <p>
-                營業時間 : 08:00~17:00<br>
-                連絡電話  : (03)1234-5678<br>
-                地址 : 320桃園市中壢區復興路46號
-                <br> <br>
-                駕車前往：在國道一號中壢出口下，沿桃桃路直行便可以抵達。<br>
-                公共交通工具：
-                乘坐火車並在中壢火車站下車，在火車站後門轉乘44號公車至羊桃觀光牧場站下車。
-                </p></div>
-                <div class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3617.2532040645333!2d121.2228819650047!3d24.95749848400817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1z5Zyw5Z2AIDogMzIw5qGD5ZyS5biC5Lit5aOi5Y2A5b6p6IiI6LevNDbomZ8!5e0!3m2!1szh-TW!2stw!4v1688885124531!5m2!1szh-TW!2stw" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+            <div :class="cloud[3].cloudClass">
+                <h2>{{cloud[2].title}}</h2>
+            </div>
+            <div :class="mapArray[6].blockClass">
+                <div :class="mapArray[7].cardClass">
+                    <h3>{{mapArray[0].name}}</h3>
+                    <p>
+                        {{mapArray[1].time}}<br>
+                        {{mapArray[2].phone}}<br>
+                        {{mapArray[3].address}}
+                        <br> <br>
+                        {{mapArray[4].car}}
+                        <br>
+                        {{mapArray[5].train}}
+                    </p>
+                </div>
+                <div class="map">
+                    <iframe :src="mapArray[8].mapLink" style=" border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
-    </main>
-    <div class="server">  
-        <div class="bot" id="bot">
-            <img src="logo/serviceopen.svg">
-            <img src="logo/service.svg">
-            <p>客服羊羊</p>
-        </div>
-        <div class="talk">
-            <i class="fa-regular fa-rectangle-xmark" id="botclose"></i>
-            <div class="header">客服羊羊</div>
-            <div class="info">
-                <div class="auto">
-                <p>請問您需要什麼服務咩?</p>
-                <span class="chattime" id="opentime"></span>
+        </main>
+        <div class="server">
+            <div class="bot" id="bot">
+                <img :src="botArray[0].imgLink">
+                <img :src="botArray[1].imgLink">
+                <p>{{botArray[2].name}}</p>
             </div>
+            <div class="talk">
+                <i :class="botArray[4].botIcon" id="botclose"></i>
+                <div class="header">{{botArray[2].name}}</div>
+                <div class="info">
+                    <div class="auto">
+                        <p>{{botArray[3].chat}}</p>
+                        <span class="chattime" id="opentime"></span>
+                    </div>
+                </div>
+                <input type="text" id="textbox" placeholder="請輸入關鍵字...">
+                <i :class="botArray[5].botIcon" id="send"></i>
             </div>
-            <input type="text" id="textbox" placeholder="請輸入關鍵字...">
-            <i class="fa-solid fa-paper-plane" id="send"></i>
         </div>
+        <footer>
+            <div class="footer">
+                <img class="star" :src="footerArray[0].imgLink">
+                <div class="col">
+                    <img :src="footerArray[1].imgLink">
+                </div>
+                <div class="col">
+                    <h3>{{mapArray[0].name}}</h3>
+                    <p>{{mapArray[1].time}}<br>
+                        {{mapArray[2].phone}}<br>
+                        {{mapArray[3].address}}</p>
+                </div>
+                <div class="col social">
+                    <h3>{{socialArray[0].title}}</h3>
+                    <li v-for="(social, index) in socialArray" :key="index">
+                        <a :href="social.link">
+                            <i :class="social.iconClass"></i>
+                        </a>
+                    </li>
+                    <a href="">
+                        <h3>{{emailArray[0].title}}</h3>
+                        <i :class="emailArray[1].iconClass"></i>
+                    </a>
+                </div>
+                <div class="totop" id="totop">
+                    <a href="#header">TOP</a>
+                </div>
+            </div>
+            <p>{{tibame}}</p>
+        </footer>
     </div>
     <footer>
         <div class="footer">
@@ -273,8 +255,159 @@
         </div>
         <p>本網站為緯育TibaMe【第85期】前端工程師專業技術養成班學員作品,僅供學習、展示之用途。</p>
     </footer>
+    </div>
+    
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    topmenuarr:[
+                        {link:'new.html',title:'最新消息'},
+                        {link:'about.html',title:'園區介紹'},
+                        {link:'activity.html',title:'牧場體驗'},
+                        {link:'QA.html',title:'常見問題'},
+                    ],
+                    paraarr:[
+                        {src:"back/cloudl.png" ,id:'cl'},
+                        {src:"back/cloudr.png" ,id:'cr'},
+                        {src:"back/moun2.png" ,id:'moun'},
+                        {src:"back/floor.png" ,id:'floor'},
+                        {src:"back/paralogo.png" ,id:'paralogo'},
+                    ],
+                    navmenu:[
+                        {link:'new.html',title:'最新消息'},
+                        {link:'about.html',title:'園區介紹',sublist:[
+                            {link:'about.html#price',title:'門票資訊'},
+                            {link:'about.html#map',title:'園區導覽'},
+                            {link:'about.html#story',title:'園區沿革'},
+                            {link:'about.html#photo',title:'動物寫真'},]},
+                        {link:'activity.html',title:'牧場體驗',sublist:[
+                            {link:'activity.html#allact',title:'活動總覽'},
+                            {link:'activity.html#actblock',title:'手作工坊'},
+                            {link:'activity.html#bbq',title:'烤肉方案'},   
+                        ]},
+                        {link:'shop.html',title:'小農產品',sublist:[
+                            {link:'milkshop.html"',title:'純乳系列'},
+                            {link:'milkshop.html"',title:'常溫點心'},
+                            {link:'milkshop.html"',title:'文創商品'},
+                            {link:'milkshop.html"',title:'全部商品'},
+                        ]},
+                        {link:'QA.html',title:'常見問題'},
+                        {link:'#',title:'登入'},
+                    ],
+                    monavmenu:[
+                        // {link:'',title:'',icon:'fa-solid fa-circle-xmark'},
+                        {link:'new.html',title:'最新消息',icon:'fa-regular fa-newspaper',style:"--i:1"},
+                        {link:'about.html',title:'園區介紹',icon:'fa-solid fa-map-location-dot',style:"--i:2"},
+                        {link:'activity.html',title:'牧場體驗',icon:'fa-solid fa-cow',style:"--i:3"},
+                        {link:'shop.html',title:'小農產品',icon:'fa-solid fa-store',style:"--i:4"},
+                        {link:'QA.html',title:'常見問題',icon:'fa-regular fa-circle-question',style:"--i:5"}
+                    ],
+                    pathli:[
+                        {link:'#new',title:'消息',id:'one'},
+                        {link:'#activity',title:'體驗',id:'two'},
+                        {link:'#shop',title:'產品',id:'three'},
+                        {link:'#contact',title:'資訊',id:'four'},
+                    ],
+                    sumarr:[
+                       {link:'about.html',title:'導覽',hides:'園區',src:'activity/4849375_s.jpg'},
+                       {link:'activity.html',title:'體驗',hides:'牧場',src:'activity/26040835_m.jpg'},
+                       {link:'about.html',title:'產品',hides:'小農',src:'p/shopbar.jpg'},
+                    ],
+                    newsarr:[
+                        {src:'item/new1.png',title:'烤肉週所有方案9折!'},
+                        {src:'item/new2.png',title:'牧場採摘季：現在是採摘的最佳時機！帶上朋友和家人，一起來採摘新鮮的水果和蔬菜，體驗農場樂趣！!'},
+                        {src:'item/new1.png',title:'烤肉週所有方案9折!'},
+                        {src:'item/new2.png',title:'牧場採摘季：現在是採摘的最佳時機！帶上朋友和家人，一起來採摘新鮮的水果和蔬菜，體驗農場樂趣！'},
+                        {src:'item/new1.png',title:'烤肉週所有方案9折!'},
+                    ],
+                    cloud: [
+                        { title: '牧場體驗' },
+                        { title: '熱銷產品' },
+                        { title: '交通資訊' },
+                        { cloudClass: 'cloudtitle' }
+                    ],
+                    moreBtn: [
+                        { btn: '更多活動' },
+                        { btn: '全部商品' },
+                        { btn: '牧場直送 小農安心' },
+                        { txt: 'btnchangecolortxt' },
+                        { right: 'fa-solid fa-angles-right' },
+                        { moreClass: 'more btnchangecolor' },
+                        { shopClass: 'goshop btnchangecolor' },
+                        { shopIcon: 'fa-solid fa-cart-shopping' }
+                    ],
+                    activityArray: [
+                        { link: 'activity.html#allact', imgLink: 'activity/25115618_s.jpg', name: '動物互動', actClass: 'card' },
+                        { link: 'activity.html#actblock', imgLink: 'bar/cartbar.jpg', name: '手作工坊', actClass: 'card' },
+                        { link: 'activity.html#bbq', imgLink: 'ready/a3.jpg', name: '烤肉方案', actClass: 'card' },
+                    ],
+                    shopArray: [
+                        { link: 'milkshop.html', firstName: '純乳', lastName: '系列', imgLink: 'p/shopbar.jpg', shopClass: 'item' },
+                        { link: 'milkshop.html', firstName: '點心', lastName: '零食', imgLink: 'p/23955063_s.jpg', shopClass: 'item' },
+                        { link: 'milkshop.html', firstName: '文創', lastName: '商品', imgLink: 'p/24846460_s.jpg', shopClass: 'item' }
+                    ],
+                    productArray: [
+                        { imgLink: 'p/cookie.png', name: '羊奶餅乾', productClass: 'object' },
+                        { imgLink: 'p/milk2.png', name: '咖啡羊奶', productClass: 'object' },
+                        { imgLink: 'p/macaro.png', name: '冰淇淋馬卡龍', productClass: 'object' },
+                        { imgLink: 'p/milk.png', name: '羊奶', productClass: 'object' },
+                        { imgLink: 'p/mocha.png', name: '抹茶冰淇淋', productClass: 'object' },
+                        { imgLink: 'p/pudding.png', name: '羊奶布丁', productClass: 'object' },
+                        { imgLink: 'p/manjyu.png', name: '羊奶饅頭', productClass: 'object' },
+                        { imgLink: 'p/manjyu2.png', name: '日式饅頭', productClass: 'object' },
+                        { leftArrow: 'fa-solid fa-arrow-left' },
+                        { rightArrow: 'fa-solid fa-arrow-right' },
+                    ],
+                    socialArray: [
+                        { title: '社群媒體' },
+                        { link: '#', iconClass: 'fa-brands fa-square-facebook' },
+                        { link: '#', iconClass: 'fa-brands fa-square-instagram' },
+                        { link: '#', iconClass: 'fa-brands fa-line' },
+                        { link: '#', iconClass: 'fa-brands fa-square-youtube' },
+                        { link: '#', iconClass: 'fa-solid fa-envelope' },
+                    ],
+                    emailArray: [
+                        { title: '客服信箱' },
+                        { iconClass: 'fa-solid fa-envelope' }
+                    ],
+                    mapArray: [
+                        { name: '羊桃觀光牧場' },
+                        { time: '營業時間 : 08:00~17:00' },
+                        { phone: '連絡電話 : (03)1234-5678' },
+                        { address: '地址 : 320桃園市中壢區復興路46號' },
+                        { car: '駕車前往：在國道一號中壢出口下，沿桃桃路直行便可以抵達。' },
+                        { train: '公共交通工具：乘坐火車並在中壢火車站下車，在火車站後門轉乘44號公車至羊桃觀光牧場站下車。' },
+                        { blockClass: 'mapblock' },
+                        { cardClass: 'mapcard' },
+                        { mapLink: 'https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3617.2532040645333!2d121.2228819650047!3d24.95749848400817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1z5Zyw5Z2AIDogMzIw5qGD5ZyS5biC5Lit5aOi5Y2A5b6p6IiI6LevNDbomZ8!5e0!3m2!1szh-TW!2stw!4v1688885124531!5m2!1szh-TW!2stw' }
+                    ],
+                    botArray: [
+                        { imgLink: 'logo/serviceopen.svg' },
+                        { imgLink: 'logo/service.svg' },
+                        { name: '客服羊羊' },
+                        { chat: '請問您需要什麼服務咩?' },
+                        { botIcon: 'fa-regular fa-rectangle-xmark' },
+                        { botIcon: 'fa-solid fa-paper-plane' }
+                    ],
+                    footerArray: [
+                        { imgLink: 'back/starhalf.png' },
+                        { imgLink: 'logo/logorow.png' }
+                    ],
+                    tibame: '本網站為緯育TibaMe【第85期】前端工程師專業技術養成班學員作品,僅供學習、展示之用途。',
+
+                }
+            }
+        }).mount("#app");
+
+    </script>
+    <script src="js/sheeprow.js"></script>
     <script src="js/common.js"></script>
     <script src="js/index.js"></script>
     <script src="js/shopslide.js"></script>
+    <script src="js/common.js" ></script>
+    <script src="js/index.js" ></script>
 </body>
+
 </html>
